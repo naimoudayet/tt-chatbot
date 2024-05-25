@@ -1,0 +1,69 @@
+{
+    "intents": [
+        {
+            "tag": "WELCOMES",
+            "patterns": [
+                "bonjour",
+                "bjr",
+                "salut",
+                "cc"
+            ],
+            "responses": [
+                "Bonjour, je suis TT-BOT, comment puis-je vous aider aujourd'hui"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "GOODBYES",
+            "patterns": [
+                "bye",
+                "bn8",
+                "bonne nuit"
+            ],
+            "responses": [
+                "Merci et bonne journée"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "AGENCES",
+            "patterns": [
+                "agence"
+            ],
+            "responses": [
+                "SHOW_AGENCES"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "OFFRES_MOBILES",
+            "patterns": [
+                "offre mobiles"
+            ],
+            "responses": [
+                "SHOW_OFFRES_MOBILES_MENU"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "OFFRES_FIXES",
+            "patterns": [
+                "offre fixes"
+            ],
+            "responses": [
+                "SHOW_OFFRES_FIXES_MENU"
+            ],
+            "context_set": ""
+        },
+        {
+            "tag": "OFFRES_INTERNET",
+            "patterns": [
+                "offre internet"
+            ],
+            "responses": [
+                "SHOW_OFFRES_INTERNET_MENU"
+            ],
+            "context_set": ""
+        }
+    ]
+}
