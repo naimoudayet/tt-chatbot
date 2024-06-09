@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+Offres Mobiles
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Offres Mobiles</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-primary" href="/offres/create">Ajouter Offre</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024-270-trans-.png" class="card-img-top" alt="Image 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 1</h5>
+                            <p class="card-text">Description offre 1.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024-x-270--FT.png" class="card-img-top" alt="Image 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 2</h5>
+                            <p class="card-text">Description offre 2.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024-x-270-Fond-tansparent[4].png" class="card-img-top" alt="Image 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 3</h5>
+                            <p class="card-text">Description offre 3.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024x270 SF.png" class="card-img-top" alt="Image 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 4</h5>
+                            <p class="card-text">Description offre 4.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024x270-etudiant-FB.png" class="card-img-top" alt="Image 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 5</h5>
+                            <p class="card-text">Description offre 5.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="/static/offres/1024X270transp.png" class="card-img-top" alt="Image 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Offre 6</h5>
+                            <p class="card-text">Description offre 6.</p>
+                            <a href="#" class="btn btn-primary">détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_offres').classList.add('active');
+</script>
+{% endblock %}
