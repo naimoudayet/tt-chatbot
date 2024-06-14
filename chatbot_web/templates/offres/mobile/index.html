@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+Offres Mobiles
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Offres Mobiles</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-primary" href="/offres/mobile/create">Ajouter Offre</a>
+                </div>
+            </div>
+
+            <div class="row">
+                {% for offre in offres %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if offre.media_photo %}
+                        <img src="/static/offres/{{ offre.media_photo }}" height="180" class="card-img-top"
+                            alt="Image 1">
+                        {% else %}
+                        <img src="/static/offres/default.jpg" height="180" class="card-img-top" alt="Image 1">
+                        {% endif %}
+                        <div class="card-body">
+                            <a href="/offres/mobile/details/{{ offre._id }}">
+                                <h5 class="card-title">{{ offre.nom }}</h5>
+                            </a>
+                            <span class="badge bg-success">{{ offre.sous_categorie }}</span>
+                            <p class="card-text">{{ (offre.description | default(''))[: 100] }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_offres').classList.add('active', 'show');
+    document.getElementById('submenu_offres').classList.add('show');
+</script>
+{% endblock %}

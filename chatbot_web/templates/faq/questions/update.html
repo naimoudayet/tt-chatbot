@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+FAQ | Questions
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Modifier Question</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/faq/sujet/details/{{ sujet_id }}">Retour</a>
+                </div>
+            </div>
+            <form action="" method="post">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="text" class="form-label">Question</label>
+                            <textarea class="form-control" name="text" rows="3" placeholder="Question"
+                                required>{{ question.text }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_faq').classList.add('active');
+</script>
+{% endblock %}

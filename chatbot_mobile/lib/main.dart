@@ -1,7 +1,10 @@
 import 'package:chatbot_mobile/consts/colors.dart';
+import 'package:chatbot_mobile/screens/home_page.dart';
 import 'package:chatbot_mobile/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,10 +38,23 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    _navigateToHome();
+  }
+
+  Future<void> _navigateToHome() async {
+    final prefs = await SharedPreferences.getInstance();
+    bool connected = prefs.getBool('CONNECTED') ?? false;
+
     Timer(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const LoginPage()),
-      );
+      if (connected) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginPage()),
+        );
+      }
     });
   }
 

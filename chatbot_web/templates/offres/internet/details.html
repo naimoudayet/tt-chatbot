@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+Offre: {{ offre.get('nom') }}
+{% endblock title %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Détails Offre</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/offres/internet">Retour</a>
+                    <a class="btn btn-sm btn-primary" href="/offres/internet/update/{{ offre.get('_id') }}">Modifier</a>
+                    <a class="btn btn-sm btn-danger" href="/offres/internet/delete/{{ offre.get('_id') }}"
+                        onclick="return confirm('Supprimer Offre ?');">
+                        Supprimer
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Nom</h6>
+                                </div>
+                                <span>{{ offre.get('nom') }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">URL</h6>
+                                </div>
+                                <a href="{{ offre.get('url') }}" target="_blank" rel="noopener noreferrer">
+                                    {{ offre.get('url') }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center border-bottom py-3">
+                                    <div class="w-100">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-0">Catégorie</h6>
+                                        </div>
+                                        <span>{{ offre.get('categorie') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center border-bottom py-3">
+                                    <div class="w-100">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-0">Sous-catégorie</h6>
+                                        </div>
+                                        <span>{{ offre.get('sous_categorie') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex align-items-center border-bottom py-3">
+                                    <div class="w-100">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-0">Photo de l'Offre</h6>
+                                        </div>
+                                        {% if offre.media_photo %}
+                                        <img src="/static/offres/{{ offre.media_photo }}" height="180"
+                                            class="card-img-top" alt="Image 1">
+                                        {% else %}
+                                        <img src="/static/offres/default.jpg" height="180" class="card-img-top"
+                                            alt="Image 1">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="h-100 bg-light rounded p-4">
+
+
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Description</h6>
+                                </div>
+                                <span>{{ offre.get('description') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    document.getElementById("menu_offres").classList.add("active", "show");
+    document.getElementById("submenu_offres").classList.add("show");
+</script>
+{% endblock js %}

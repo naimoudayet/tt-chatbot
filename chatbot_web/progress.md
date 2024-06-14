@@ -1,0 +1,46 @@
+- [ ] Admin
+    - [x] login
+    - [x] faq
+        - [x] create
+        - [x] update
+        - [x] delete
+        - [x] read all
+        - [x] read one
+            - [x] questions
+            - [x] reponses
+    - [x] agences
+        - [x] read all
+        - [x] read one
+        - [x] create
+        - [x] update
+        - [x] delete
+    - [x] clients
+        - [x] read all
+        - [x] read one
+            - [x] factures
+                - [x] read all
+                - [x] create
+                - [x] update
+        - [x] create
+        - [x] update
+        - [x] delete
+    - [x] offres mobile
+        - [x] read all
+        - [x] read one
+        - [x] create
+        - [x] update
+        - [x] delete
+    - [x] offres fixe
+        - [x] read all
+        - [x] read one
+        - [x] create
+        - [x] update
+        - [x] delete
+    - [x] offres internet
+        - [x] read all
+        - [x] read one
+        - [x] create
+        - [x] update
+        - [x] delete
+
+- [ ] Mobile

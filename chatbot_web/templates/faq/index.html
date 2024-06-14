@@ -13,7 +13,7 @@ FAQ
                     <h6 class="mb-4">Sujets</h6>
                 </div>
                 <div class="col-6 text-end">
-                    <a class="btn btn-sm btn-primary" href="">Ajouter Sujet</a>
+                    <a class="btn btn-sm btn-primary" href="/faq/sujet/create">Ajouter Sujet</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -28,26 +28,35 @@ FAQ
                         </tr>
                     </thead>
                     <tbody>
+                        {% for sujet in sujets %}
                         <tr>
                             <th scope="row">
-                                <a href="#" class="text-primary">#8e33075b6</a>
+                                <a href="/faq/sujet/details/{{ sujet.get('_id') }}" class="text-primary">{{
+                                    (sujet.get('_id') |
+                                    string)[:8]
+                                    }}</a>
                             </th>
-                            <td>Salutations</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td>{{ sujet.get('text') }}</td>
+                            <td>{{ (question_read_all(sujet.get('_id') | string) | length) | default(0) }}</td>
+                            <td>{{ (reponse_read_all(sujet.get('_id') | string) | length) | default(0) }}</td>
                             <td class="text-end">
-                                <a href="/faq/details/_id" class="btn btn-square btn-dark">
+                                <a href="/faq/sujet/details/{{ sujet.get('_id') }}" class="btn btn-square btn-dark">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="/faq/update/_id" class="btn btn-square btn-success">
+                                <a href="/faq/sujet/update/{{ sujet.get('_id') }}" class="btn btn-square btn-success">
                                     <i class="fa fa-pen"></i>
                                 </a>
-                                <a href="/faq/delete/_id" class="btn btn-square btn-danger">
+                                <a href="/faq/sujet/delete/{{ sujet.get('_id') }}" class="btn btn-square btn-danger"
+                                    onclick="return confirm('Supprimer Sujet');">
                                     <i class="fa fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
-
+                        {% else %}
+                        <tr>
+                            <td colspan="5">aucun sujet</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

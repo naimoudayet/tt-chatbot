@@ -73,17 +73,14 @@ class User:
         })
 
     @staticmethod
-    def read_one(user_id, role):
+    def read_one(user_id, role='CLIENT'):
         return Database.get_collection(COLLECTION_NAME).find_one({
             "_id": ObjectId(user_id), "role": role
         })
 
     @staticmethod
-    def read_all(role=None):
-        domain = {}
-        if role:
-            domain = {"role": role}
-        return list(Database.get_collection(COLLECTION_NAME).find(domain))
+    def read_all(role='CLIENT'):
+        return list(Database.get_collection(COLLECTION_NAME).find({"role": role}))
 
     @staticmethod
     def find_exist(telephone, email):
@@ -103,3 +100,18 @@ class User:
     @staticmethod
     def drop():
         Database.get_collection(COLLECTION_NAME).drop()
+
+    @staticmethod
+    def to_json(user):
+        if not user:
+            return {}
+
+        return {
+            "_id": str(user['_id']),
+            "nom": user['nom'],
+            "prenom": user['prenom'],
+            "telephone": user['telephone'],
+            "email": user['email'],
+            "etat": user['etat'],
+            "date_creation": user['date_creation']
+        }

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+Modifier Offre - {{ offre.get('nom') }}
+{% endblock title %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Modifier Offre</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/offres/fixe/details/{{ offre.get('_id') }}">Retour</a>
+                </div>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="nom" value="{{ offre.get('nom') }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="url" class="form-label">URL</label>
+                            <input type="text" class="form-control" name="url" value="{{ offre.get('url') }}" required>
+                        </div>
+
+
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="7"
+                                required>{{ offre.get('description') }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        {% if offre.media_photo %}
+                        <div class="mb-3">
+                            <label for="media_photo" class="form-label">Photo actuelle</label><br>
+                            <img src="/static/offres/{{ offre.media_photo }}" height="180" class="card-img-top"
+                                alt="Image 1">
+                        </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="media_photo" class="form-label">Nouvelle Photo</label>
+                            <input type="file" class="form-control" name="media_photo">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="sous_categorie" class="form-label">Sous-catégorie</label>
+                            <input type="text" class="form-control" name="sous_categorie"
+                                value="{{ offre.get('sous_categorie') }}" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_offres').classList.add('active', 'show');
+    document.getElementById('submenu_offres').classList.add('show');
+</script>
+{% endblock js %}

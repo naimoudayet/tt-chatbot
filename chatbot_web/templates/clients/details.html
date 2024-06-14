@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}
+Utilisateurs
+{% endblock title %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Détails client</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/clients">Retour</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Nom</h6>
+                                </div>
+                                <span>{{ client.get('nom') }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Téléphone</h6>
+                                </div>
+                                <span>{{ client.get('telephone') }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Téléphone</h6>
+                                </div>
+                                {% if client.get('etat') == 'ACTIVE' %}
+                                <span class="badge bg-success">Active</span>
+                                {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="h-100 bg-light rounded p-4">
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Prénom</h6>
+                                </div>
+                                <span>{{ client.get('prenom') }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <span>{{ client.get('email') }}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <div class="w-100">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Date Création</h6>
+                                </div>
+                                <span>{{ client.get('date_creation') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Factures</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-primary"
+                        href="/clients/details/{{ client.get('_id') }}/factures/create">Ajouter
+                        Facture</a>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">État</th>
+                            <th scope="col">Date Paiement</th>
+                            <th scope="col">Date Facturation</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for facture in factures %}
+                        <tr>
+                            <th scope="row">
+                                <a href="/clients/details/{{ client.get('_id') }}/factures/update/{{ facture.get('_id') }}"
+                                    class="text-primary">{{
+                                    (client.get('_id') |
+                                    string)[:8]
+                                    }}</a>
+                            </th>
+                            <td>{{ facture.get('montant') }}</td>
+                            <td>
+                                {% if facture.get('etat') == 'PAYER' %}
+                                <span class="badge bg-success">PAYER</span>
+                                {% else %}
+                                <span class="badge bg-dark">EN ATTENTE</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ facture.get('date_paiement') }}</td>
+                            <td>{{ facture.get('date_facture') }}</td>
+                            <td class="text-end">
+                                <a href="/clients/details/{{ client.get('_id') }}/factures/update/{{ facture.get('_id') }}"
+                                    class="btn btn-square btn-success">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                                <a href="/clients/details/{{ client.get('_id') }}/factures/delete/{{ facture.get('_id') }}"
+                                    class="btn btn-square btn-danger" onclick="return confirm('Supprimer Facture');">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_clients').classList.add('active');
+</script>
+{% endblock js %}

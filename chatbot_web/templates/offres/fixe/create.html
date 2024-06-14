@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Offres Fixe
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Ajouter Offre</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/offres/fixe">Retour</a>
+                </div>
+            </div>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="nom" placeholder="Nom de l'offre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="url" class="form-label">URL</label>
+                            <input type="text" class="form-control" name="url" placeholder="URL de l'offre" required>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="media_photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control" name="media_photo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sous_categorie" class="form-label">Sous-catégorie</label>
+                            <input type="text" class="form-control" name="sous_categorie"
+                                placeholder="Sous-catégorie de l'offre" required>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="3"
+                                placeholder="Description de l'offre" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById('menu_offres').classList.add('active', 'show');
+    document.getElementById('submenu_offres').classList.add('show');
+</script>
+{% endblock %}

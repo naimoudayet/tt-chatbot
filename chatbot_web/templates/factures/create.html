@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Factures
+{% endblock %}
+
+{% block content %}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Ajouter Facture</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/clients/details/{{ client_id }}">Retour</a>
+                </div>
+            </div>
+            <form action="" method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="montant" class="form-label">Montant</label>
+                            <input type="text" class="form-control" name="montant" placeholder="Montant de la facture">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="date_facture" class="form-label">Date Facture</label>
+                            <input type="date" class="form-control" name="date_facture">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    document.getElementById("menu_clients").classList.add("active");
+</script>
+{% endblock %}

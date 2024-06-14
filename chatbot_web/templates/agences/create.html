@@ -21,24 +21,39 @@ Agences
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nom</label>
-                            <input type="text" class="form-control">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="nom">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Adresse</label>
-                            <input type="text" class="form-control">
+                            <label for="adresse" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" name="adresse">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Téléphone</label>
-                            <input type="text" class="form-control">
+                            <label for="exampleInputEmail1" class="form-label">Ville</label>
+                            <select name="ville" class="form-control">
+                                <option>Choisir la ville</option>
+                                {% for ville in villes %}
+                                <option value="{{ ville }}">{{ ville }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="num_fixe" class="form-label">Fixe</label>
+                                    <input type="text" class="form-control" name="num_fixe">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="num_fax" class="form-label">Fax</label>
+                                    <input type="text" class="form-control" name="num_fax">
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Fax</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="text" class="form-control">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email">
                         </div>
                         <div class="row">
                             <div class="col-6">
@@ -74,6 +89,8 @@ Agences
 
 {% block js %}
 <script>
+    document.getElementById("menu_agences").classList.add("active", "show");
+    document.getElementById("submenu_agences").classList.add("show");
 
 
     /////////////////////////////////////////////////////////////////////////

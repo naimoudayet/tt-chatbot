@@ -80,23 +80,24 @@
                     <a href="/faq" class="nav-item nav-link" id="menu_faq"><i
                             class="fa fa-circle-question me-2"></i>FAQ</a>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                        <a href="#" class="nav-link dropdown-toggle" id="menu_offres" data-bs-toggle="dropdown"><i
                                 class="fa fa-tag me-2"></i>Offres</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="/offres" class="dropdown-item">Mobile</a>
-                            <a href="/offres" class="dropdown-item">Fixe</a>
-                            <a href="/offres" class="dropdown-item">Internet</a>
+                        <div class="dropdown-menu bg-transparent border-0" id="submenu_offres">
+                            <a href="/offres/mobile" class="dropdown-item">Mobile</a>
+                            <a href="/offres/fixe" class="dropdown-item">Fixe</a>
+                            <a href="/offres/internet" class="dropdown-item">Internet</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="menu_agences" data-bs-toggle="dropdown"><i
                                 class="fa fa-map-location me-2"></i>Agences</a>
-                        <div class="dropdown-menu bg-transparent border-0">
+                        <div class="dropdown-menu bg-transparent border-0" id="submenu_agences">
                             <a href="/agences/create" class="dropdown-item">Ajouter</a>
                             <a href="/agences" class="dropdown-item">Afficher</a>
                         </div>
                     </div>
-                    <a href="/clients" class="nav-item nav-link" id="menu_clients"><i class="fa fa-users me-2"></i>Utilisateurs</a>
+                    <a href="/clients" class="nav-item nav-link" id="menu_clients"><i
+                            class="fa fa-users me-2"></i>Utilisateurs</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-cog me-2"></i>Paramètres</a>
@@ -153,6 +154,12 @@
 
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        {% include "_flash.html" %}
+                    </div>
+                </div>
+
                 {% block content %}
 
                 {% endblock content %}

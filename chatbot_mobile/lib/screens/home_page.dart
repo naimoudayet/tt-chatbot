@@ -1,5 +1,6 @@
 import 'package:chatbot_mobile/consts/colors.dart';
-import 'package:chatbot_mobile/screens/espace_tt_page.dart';
+import 'package:chatbot_mobile/screens/agences_page.dart';
+import 'package:chatbot_mobile/screens/offres_page.dart';
 import 'package:chatbot_mobile/screens/paiement_facture_page.dart';
 import 'package:flutter/material.dart';
 
@@ -74,11 +75,11 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              title: const Text('Espace TT'),
+              title: const Text('Agences'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EspaceTtPage()),
+                  MaterialPageRoute(builder: (context) => const AgencesPage()),
                 );
               },
             ),
@@ -88,19 +89,34 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: const Text('Internet'),
                   onTap: () {
-                    // Navigate to Internet Offers page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const OffrePage(categorie: 'INTERNET')),
+                    );
                   },
                 ),
                 ListTile(
                   title: const Text('Mobile'),
                   onTap: () {
-                    // Navigate to Mobile Offers page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const OffrePage(categorie: 'MOBILE')),
+                    );
                   },
                 ),
                 ListTile(
                   title: const Text('Fixe'),
                   onTap: () {
-                    // Navigate to Fixe Offers page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const OffrePage(categorie: 'FIXE')),
+                    );
                   },
                 ),
               ],
@@ -131,14 +147,16 @@ class _HomePageState extends State<HomePage> {
                 controller: _scrollController,
                 children: [
                   _buildMessageBubble(
-                      'Welcome to our chat service. Feel free to ask any questions you have.'),
+                      'Bienvenue à notre service de chat. N\'hésitez pas à poser toutes vos questions.'),
                   _buildMessageBubble(
-                      'Hello! Let me know if there\'s anything I can help you with.'),
-                  _buildUserMessageBubble('Sure, thank you!'),
+                      'Bonjour! Faites-moi savoir si je peux vous aider avec quelque chose.'),
+                  _buildUserMessageBubble('Bien sûr, merci!'),
                   _buildUserMessageBubble(
-                      'Can you help me with my account balance?'),
-                  _buildMessageBubble('Hi there! How can I assist you today?'),
-                  _buildMessageBubble('Hi there! How can I assist you today?'),
+                      'Pouvez-vous m\'aider avec le solde de mon compte?'),
+                  _buildMessageBubble(
+                      'Bonjour! Comment puis-je vous aider aujourd\'hui?'),
+                  _buildMessageBubble(
+                      'Bien sûr! Votre solde actuel est de 50 TND.'),
                 ],
               ),
             ),
