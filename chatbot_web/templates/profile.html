@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Modifier Profil</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/">Retour</a>
+                </div>
+            </div>
+            <form action="/profile/update" method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="nom" value="{{user['nom']}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="telephone" class="form-label">Téléphone</label>
+                            <input type="text" class="form-control" name="telephone" value="{{user['telephone']}}">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" name="prenom" value="{{user['prenom']}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" value="{{user['email']}}">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4">
+            <div class="row">
+                <div class="col-6">
+                    <h6 class="mb-4">Modifier Mot de passe</h6>
+                </div>
+                <div class="col-6 text-end">
+                    <a class="btn btn-sm btn-dark" href="/">Retour</a>
+                </div>
+            </div>
+            <form action="/profile/update/password" method="post">
+                <div class="row">
+                    <div class="col-6 offset-3">
+                        <div class="mb-3">
+                            <label for="ancien_passe" class="form-label">Ancien Mot de passe</label>
+                            <input type="password" class="form-control" name="ancien_passe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="nouveau_passe" class="form-label">Nouveau Mot de passe</label>
+                            <input type="password" class="form-control" name="nouveau_passe">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmer_passe" class="form-label">Confirmer Mot de passe</label>
+                            <input type="password" class="form-control" name="confirmer_passe">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    document.getElementById("menu_parametres").classList.add("active", "show");
+    document.getElementById("submenu_parametres").classList.add("show");
+</script>
+{% endblock js %}

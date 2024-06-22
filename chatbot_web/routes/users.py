@@ -44,7 +44,7 @@ def profile():
 @users_blueprint.route("/profile/update", methods=["post"])
 @is_logged_in
 def profile_update():
-    user = User.read_one(session["_id"])
+    user = User.read_one(session["_id"], role='ADMIN')
     if not user:
         return redirect(url_for("users.logout"))
 
@@ -53,15 +53,15 @@ def profile_update():
     email = request.form["email"]
     telephone = request.form["telephone"]
 
-    User.update(session["_id"], nom, prenom, telephone, email)
+    User.update(session["_id"], nom, prenom, telephone, email, etat="ACTIVE")
     flash("Profil modifié avec succès.", "success")
-    return redirect(url_for("users.profil"))
+    return redirect(url_for("users.profile"))
 
 
 @users_blueprint.route("/profile/update/password", methods=["post"])
 @is_logged_in
 def profile_update_password():
-    user = User.read_one(session["_id"])
+    user = User.read_one(session["_id"], role='ADMIN')
     if not user:
         return redirect(url_for("users.logout"))
 
@@ -70,17 +70,16 @@ def profile_update_password():
     confirmer_passe = request.form["confirmer_passe"]
 
     if nouveau_passe == confirmer_passe:
-        response = User.update_password(
-            session["_id"], ancien_passe, nouveau_passe)
+        response = User.update_password(session["_id"], ancien_passe, nouveau_passe, role='ADMIN')
         if response:
             flash("mot de passe modifié avec succès.", "success")
-            return redirect(url_for("users.profil"))
+            return redirect(url_for("users.profile"))
         else:
             flash("ancien mot de passe erronée", "danger")
-            return redirect(url_for("users.profil"))
+            return redirect(url_for("users.profile"))
 
     flash("mot de passe non identique.", "danger")
-    return redirect(url_for("users.profil"))
+    return redirect(url_for("users.profile"))
 
 
 @users_blueprint.route("/logout")

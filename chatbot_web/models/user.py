@@ -67,6 +67,23 @@ class User:
         )
 
     @staticmethod
+    def update_password(user_id, ancien_passe, nouveau_passe, role):
+        updated = False
+        user = User.read_one(user_id, role)
+        if user:
+            if check_password_hash(user['password'], ancien_passe):
+                Database.get_collection(COLLECTION_NAME).find_one_and_update(
+                    {"_id": ObjectId(user_id)},
+                    {"$set": {
+                        "password":  generate_password_hash(nouveau_passe)
+                    }
+                    }
+                )
+                updated = True
+
+        return updated
+
+    @staticmethod
     def delete(user_id):
         Database.get_collection(COLLECTION_NAME).find_one_and_delete({
             "_id": ObjectId(user_id)
