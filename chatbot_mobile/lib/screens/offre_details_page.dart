@@ -1,3 +1,4 @@
+import 'package:chatbot_mobile/config/api.dart';
 import 'package:flutter/material.dart';
 import 'package:chatbot_mobile/consts/colors.dart';
 import 'package:chatbot_mobile/models/offre_model.dart';
@@ -33,8 +34,30 @@ class OffreDetailsPage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  'https://via.placeholder.com/200',
+                  'http://${ip}:5000/static/offres/${offer.mediaPhoto}',
                   fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    }
+                  },
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return Image.network(
+                      'https://via.placeholder.com/200',
+                      fit: BoxFit.cover,
+                    );
+                  },
                 ),
               ),
             ),

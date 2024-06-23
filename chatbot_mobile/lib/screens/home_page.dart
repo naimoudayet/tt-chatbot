@@ -5,19 +5,83 @@ import 'package:chatbot_mobile/screens/paiement_facture_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final ScrollController _scrollController = ScrollController();
+  int _selectedIndex = 0;
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+  final List<String> _titles = [
+    'Accueil',
+    'Offres',
+    'Chatbot',
+    'Factures',
+    'Agences'
+  ];
+
+  void _onItemTapped(int index) {
+    if (index == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const AgencesPage()),
+      );
+    } else if (index == 3) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PaiementFacturePage()),
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
+
+  void _onCardTapped(String cardName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => OffrePage(categorie: cardName)),
+    );
+  }
+
+  Widget _buildCards() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () => _onCardTapped('MOBILE'),
+            child: const Card(
+              child: ListTile(
+                leading: Icon(Icons.phone_android),
+                title: Text('Mobile'),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => _onCardTapped('INTERNET'),
+            child: const Card(
+              child: ListTile(
+                leading: Icon(Icons.wifi),
+                title: Text('Internet'),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => _onCardTapped('FIXE'),
+            child: const Card(
+              child: ListTile(
+                leading: Icon(Icons.phone),
+                title: Text('Fixe'),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -27,199 +91,57 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: primaryColor,
         elevation: 10,
-        title: const Text(
-          'Chatbot',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          _titles[_selectedIndex],
+          style: const TextStyle(color: Colors.white),
         ),
         iconTheme: const IconThemeData(
           color: Colors.white, // Set desired color for icons
         ),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage('assets/images/splash_screen_bg.jpeg'),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.5), // Adjust opacity as needed
-                  BlendMode.darken, // Adjust blend mode as needed
-                ),
-              )),
-              child: Center(
-                  child: Text(
-                'TT Chatbot',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 20),
-              )),
-            ),
-            ListTile(
-              title: const Text('Chatbot'),
-              onTap: () {
-                // Navigate to Chatbot page
-              },
-            ),
-            ListTile(
-              title: const Text('Paiement Facture'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PaiementFacturePage()),
-                );
-              },
-            ),
-            ListTile(
-              title: const Text('Agences'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AgencesPage()),
-                );
-              },
-            ),
-            ExpansionTile(
-              title: const Text('Offres'),
-              children: [
-                ListTile(
-                  title: const Text('Internet'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const OffrePage(categorie: 'INTERNET')),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: const Text('Mobile'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const OffrePage(categorie: 'MOBILE')),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: const Text('Fixe'),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const OffrePage(categorie: 'FIXE')),
-                    );
-                  },
-                ),
-              ],
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text('Profil'),
-              onTap: () {
-                // Navigate to Profil page
-              },
-            ),
-            ListTile(
-              title: const Text('Logout'),
-              onTap: () {
-                // Perform logout action
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ListView(
-                reverse: true,
-                controller: _scrollController,
-                children: [
-                  _buildMessageBubble(
-                      'Bienvenue à notre service de chat. N\'hésitez pas à poser toutes vos questions.'),
-                  _buildMessageBubble(
-                      'Bonjour! Faites-moi savoir si je peux vous aider avec quelque chose.'),
-                  _buildUserMessageBubble('Bien sûr, merci!'),
-                  _buildUserMessageBubble(
-                      'Pouvez-vous m\'aider avec le solde de mon compte?'),
-                  _buildMessageBubble(
-                      'Bonjour! Comment puis-je vous aider aujourd\'hui?'),
-                  _buildMessageBubble(
-                      'Bien sûr! Votre solde actuel est de 50 TND.'),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Type a message...',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    // Send message action
-                    // Scroll to bottom after sending a message
-                    _scrollController.animateTo(
-                      _scrollController.position.minScrollExtent,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
-                  },
-                  color: primaryColor,
-                ),
-              ],
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              //   Navigator.push(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => const Pro()),
+              //   );
+            },
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildMessageBubble(String message) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        borderRadius: BorderRadius.circular(8),
+      body: Center(
+        child: _selectedIndex == 1
+            ? _buildCards()
+            : Text('Selected option: $_selectedIndex'),
       ),
-      child: Text(message),
-    );
-  }
-
-  Widget _buildUserMessageBubble(String message) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Text(
-          message,
-          style: const TextStyle(color: Colors.white),
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Accueil',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_offer),
+            label: 'Offres',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wechat, size: 60), // Make this icon larger
+            label: 'Chatbot',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.payment),
+            label: 'Factures',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: 'Agences',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: primaryColor,
+        onTap: _onItemTapped,
       ),
     );
   }
